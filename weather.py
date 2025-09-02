@@ -7,7 +7,7 @@ bot = telebot.TeleBot(bot_token)
 channel_id = os.environ.get("CHANNEL_ID")
 
 
-xyz = {
+provinces = {
 	"Tehran": {"lat":35.6892, "lon":51.3890},
 	"Alborz": {"lat":35.9400, "lon":50.9600},
 	"Isfahan": {"lat":32.6546, "lon":51.6680},
@@ -44,7 +44,7 @@ xyz = {
 api_key = os.environ.get("API_KEY")
 
 
-for xyz, coords in xyz.items:
+for province, coords in provinces.items:
 
 	lat = ["lat"]
 	lon = ["lon"]
@@ -60,7 +60,7 @@ for xyz, coords in xyz.items:
 		desc = data['main'][0]['description']
 		wind = data['wind']['speed']
 
-		message += f"⛅{xyz}:{temp}°C\n⛅رطوبت:{humidity}%\n⛅هوا:{desc}\n⛅سرعت وزش باد::{wind}ms \n\n"
+		message += f"⛅{provinces}:{temp}°C\n⛅رطوبت:{humidity}%\n⛅هوا:{desc}\n⛅سرعت وزش باد::{wind}ms \n\n"
 
 
 
