@@ -1,8 +1,10 @@
 import telebot, requests
+import os
 
-bot = telebot.TeleBot("TOKEN RA VARED KONID")
+bot_token = os.environ.get("BOT_TOKEN")
+bot = telebot.TeleBot(bot_token)
 
-channel_id = '@persianagram'
+channel_id = os.environ.get("CHANNEL_ID")
 
 
 xyz = {
@@ -39,7 +41,7 @@ xyz = {
 	"Kurdistan": {"lat":35.3140, "lon":47.0610}
 }
 
-api_key = "b91276889624fce5716bac97b6d984d7"
+api_key = os.environ.get("API_KEY")
 
 
 for xyz, coords in xyz.items:
