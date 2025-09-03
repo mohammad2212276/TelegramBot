@@ -43,13 +43,25 @@ provinces = {
     "همدان": (34.7992, 48.5146),
     "یزد": (31.8974, 54.3675)
 }
+for province, (lat, lon) in provinces.items():
+
+    url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric&lang=fa"
+    response = requests.get(url)
+    data = response.json()
+
+    if "main" in data:
+        temp = data['main']['temp']
+        desc = data['main']['description']
+        humidity = data['main']['humidity']
+        wind = data['wind']['speed']
+        
+        message += f"⛅{province}:{temp}C\n⛅رطوبت:{humidity}%\n⛅هوا:{desc}\n⛅سرعت وزش باد:{wind}ms\n\n"    
+    
+    else:
+        message += f"{province} NOT FOUND\n\n"
+    
 
 
+bot.send_message(channel_id, message)
 
-url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric&lang=fa"
-msg += f"⛅{province}:{temp}C\n⛅رطوبت:{humidity}%\n⛅هوا:{desc}\n⛅سرعت وزش باد:{wind}ms\n\n"
-
-
-
-bot.send_message(channel_id, msg)
 bot.infinity_polling()
