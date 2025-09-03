@@ -1,13 +1,17 @@
-import telebot, requests
+
 import os
+import telebot
+import requests
 
-bot_token = os.environ.get("BOT_TOKEN")
-bot = telebot.TeleBot(bot_token)
 
-channel_id = os.environ.get("CHANNEL_ID")
+BOT_TOKEN = os.environ.get('BOT_TOKEN')
 
-api_key = os.environ.get("API_KEY")
 
+API_KEY = os.environ.get('API_KEY')
+
+CHANNEL_ID = os.environ.get('CHANNEL_ID')
+
+bot = telebot.TeleBot(BOT_TOKEN)
 
 
 provinces = {
@@ -43,25 +47,27 @@ provinces = {
     "همدان": (34.7992, 48.5146),
     "یزد": (31.8974, 54.3675)
 }
-for province, (lat, lon) in provinces.items():
 
-    url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric&lang=fa"
+
+message = "🌤️ وضعیت آب و هوا در استان‌های ایران:\n\n"
+
+
+for province, (lat, lon) in provinces.items():
+    url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={API_KEY}&units=metric&lang=fa"
     response = requests.get(url)
     data = response.json()
-
+    
     if "main" in data:
-        temp = data['main']['temp']
-        desc = data['weather'][0]['description']
-        humidity = data['main']['humidity']
-        wind_speed = data['wind']['speed']
+        temp = data["main"]["temp"]
+        description = data["weather"][0]["description"]
+        humidity = data["main"]["humidity"]
+        wind_speed = data["wind"]["speed"]
         
         message += f"⛅ {province}: {temp}°C ({description})\n⛅ رطوبت: {humidity}%\n⛅ باد: {wind_speed} m/s\n\n"
-    
     else:
-        message += f"{province} NOT FOUND\n\n"
-    
+        message += f"❌ {province}: دریافت نشد\n\n"
 
 
-bot.send_message(channel_id, message)
+bot.send_message(CHANNEL_ID, message)
 
 bot.infinity_polling()
