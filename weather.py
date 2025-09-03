@@ -53,7 +53,7 @@ for province, (lat, lon) in provinces.items():
         temp = data['main']['temp']
         desc = data['weather'][0]['description']
         humidity = data['main']['humidity']
-        wind = data['wind']['speed']
+        wind_speed = data['wind']['speed']
         
         message += f"⛅ {province}: {temp}°C ({description})\n⛅ رطوبت: {humidity}%\n⛅ باد: {wind_speed} m/s\n\n"
     
