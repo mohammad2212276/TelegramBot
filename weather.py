@@ -51,7 +51,7 @@ for province, (lat, lon) in provinces.items():
 
     if "main" in data:
         temp = data['main']['temp']
-        desc = data['main']['description']
+        desc = data['main'][0]['description']
         humidity = data['main']['humidity']
         wind = data['wind']['speed']
         
