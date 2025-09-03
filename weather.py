@@ -6,63 +6,49 @@ bot = telebot.TeleBot(bot_token)
 
 channel_id = os.environ.get("CHANNEL_ID")
 
-
-provinces = {
-	"Tehran": {"lat":35.6892, "lon":51.3890},
-	"Alborz": {"lat":35.9400, "lon":50.9600},
-	"Isfahan": {"lat":32.6546, "lon":51.6680},
-	"Fars": {"lat":29.5918, "lon":52.5836},
-	"Khorasan Razavi": {"lat":36.2969, "lon":59.6069},
-	"Mazandaran": {"lat":36.5656, "lon":53.0589},
-	"Gilan": {"lat":37.2800, "lon":49.5920},
-	"Kerman": {"lat":30.2830, "lon":57.0834},
-	"Hormozgan": {"lat":27.1830, "lon":56.2660},
-	"Khuzestan": {"lat":31.3270, "lon":48.6940},
-	"West Azarbaijan": {"lat":37.5560, "lon":45.0725},
-	"East Azarbaijan": {"lat":38.0810, "lon":46.2919},
-	"Lorestan": {"lat":33.4878, "lon":48.6940},
-	"Markazi": {"lat":34.6401, "lon":50.8759},
-	"Qazvin": {"lat":36.2688, "lon":50.0041},
-	"Golestan": {"lat":36.8383, "lon":54.4439},
-	"Ardabil": {"lat":38.2510, "lon":48.2970},
-	"Yazd": {"lat":31.8974, "lon":54.3569},
-	"Kohgiluyeh and Boyer-Ahmad": {"lat":30.8370, "lon":50.5800},
-	"Sistan and Baluchestan": {"lat":29.4950, "lon":60.8720},
-	"Kermanshah": {"lat":34.3142, "lon":47.0650},
-	"Hamedan": {"lat":34.7986, "lon":48.5146},
-	"Chaharmahal and Bakhtiari": {"lat":32.2476, "lon":50.8495},
-	"Bushehr": {"lat":28.9234, "lon":50.8203},
-	"Zanjan": {"lat":36.6746, "lon":48.4787},
-	"Semnan": {"lat":35.5729, "lon":53.3965},
-	"North Khorasan": {"lat":37.4713, "lon":57.3306},
-	"South Khorasan": {"lat":32.8663, "lon":59.2211},
-	"Qom": {"lat":34.6399, "lon":50.8759},
-	"Ilam": {"lat":33.6373, "lon":46.4220},
-	"Kurdistan": {"lat":35.3140, "lon":47.0610}
-}
-
 api_key = os.environ.get("API_KEY")
 
 
-for province, coords in provinces.items():
 
-	lat = ["lat"]
-	lon = ["lon"]
+provinces = {
+    "تهران": (35.6892, 51.3890),
+    "البرز": (35.8400, 50.9391),
+    "اصفهان": (32.6539, 51.6660),
+    "آذربایجان شرقی": (38.0667, 46.2993),
+    "آذربایجان غربی": (37.5527, 45.0760),
+    "اردبیل": (38.2498, 48.2933),
+    "ایلام": (33.6374, 46.4227),
+    "بوشهر": (28.9234, 50.8203),
+    "چهارمحال و بختیاری": (32.3267, 50.8645),
+    "خراسان جنوبی": (32.8663, 59.2211),
+    "خراسان رضوی": (36.2972, 59.6067),
+    "خراسان شمالی": (37.4718, 57.1011),
+    "خوزستان": (31.3203, 48.6692),
+    "زنجان": (36.6736, 48.4787),
+    "سمنان": (35.5729, 53.3973),
+    "سیستان و بلوچستان": (29.4963, 60.8629),
+    "فارس": (29.5918, 52.5836),
+    "قزوین": (36.2730, 50.0041),
+    "قم": (34.6401, 50.8764),
+    "کردستان": (35.3219, 46.9862),
+    "کرمان": (30.2839, 57.0834),
+    "کرمانشاه": (34.3142, 47.0650),
+    "کهگیلویه و بویراحمد": (30.6680, 51.5876),
+    "گلستان": (36.8416, 54.4438),
+    "گیلان": (37.2808, 49.5832),
+    "لرستان": (33.4667, 48.3569),
+    "مازندران": (36.5659, 53.0586),
+    "مرکزی": (34.0842, 49.6983),
+    "هرمزگان": (27.1832, 56.2666),
+    "همدان": (34.7992, 48.5146),
+    "یزد": (31.8974, 54.3675)
+}
 
-	url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric&lang=fa"
 
-	response = requests.get(url)
 
-	if response.status_code == "200":
-		data = response.json()
-		temp = data['main']['temp']
-		humidity = data['main']['humidity']
-		desc = data['main'][0]['description']
-		wind = data['wind']['speed']
+url = f"https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric&lang=fa"
+msg += f"⛅{province}:{temp}C\n⛅رطوبت:{humidity}%\n⛅هوا:{desc}\n⛅سرعت وزش باد:{wind}ms\n\n"
 
-		msg += f"⛅{province}:{temp}C\n⛅رطوبت:{humidity}%\n⛅هوا:{desc}\n⛅سرعت وزش باد:{wind}ms\n\n"
-    else:
-		msg += f"{province}:not Found\n\n"
 
 
 bot.send_message(channel_id, msg)
