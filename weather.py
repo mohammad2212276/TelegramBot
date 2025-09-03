@@ -60,16 +60,7 @@ for province, coords in provinces.items():
 		desc = data['main'][0]['description']
 		wind = data['wind']['speed']
 
-		message += f"⛅{provinces}:{temp}°C\n⛅رطوبت:{humidity}%\n⛅هوا:{desc}\n⛅سرعت وزش باد::{wind}ms \n\n"
-
-
-
-
-
-
-
-
-
+		message += f"⛅{province}:{temp}°C\n⛅رطوبت:{humidity}%\n⛅هوا:{desc}\n⛅سرعت وزش باد:{wind}ms\n\n"
 
 bot.send_message(channel_id, message)
 bot.polling()
