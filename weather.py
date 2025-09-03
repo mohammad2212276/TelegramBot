@@ -55,7 +55,7 @@ for province, (lat, lon) in provinces.items():
         humidity = data['main']['humidity']
         wind = data['wind']['speed']
         
-        message += f"⛅ {province}:{temp}C\n ⛅رطوبت:{humidity}%\n ⛅هوا:{desc}\n ⛅سرعت وزش باد:{wind}ms\n\n"    
+        message += f"⛅ {province}: {temp}°C ({description})\n⛅ رطوبت: {humidity}%\n⛅ باد: {wind_speed} m/s\n\n"
     
     else:
         message += f"{province} NOT FOUND\n\n"
