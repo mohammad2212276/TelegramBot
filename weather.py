@@ -44,7 +44,7 @@ provinces = {
 api_key = os.environ.get("API_KEY")
 
 
-for province, coords in provinces.items:
+for province, coords in provinces.items():
 
 	lat = ["lat"]
 	lon = ["lon"]
@@ -72,4 +72,4 @@ for province, coords in provinces.items:
 
 
 bot.send_message(channel_id, message)
-
+bot.polling()
