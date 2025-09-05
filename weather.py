@@ -66,7 +66,7 @@ for province, (lat, lon) in provinces.items():
         message += f"⛅ {province}: {temp}°C ({description})\n⛅ رطوبت: {humidity}%\n⛅ باد: {wind_speed} m/s\n\n"
     else:
         message += f"❌ {province}: دریافت نشد\n\n"
-
+message += "@persianagram" 
 
 bot.send_message(CHANNEL_ID, message)
 
